@@ -1,0 +1,66 @@
+.main {
+    width: 80vw;
+    height: 100vh;
+    background-color: rgb(168, 114, 114);
+    margin: 0 auto;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    position: relative;
+}
+
+.Todo {
+    position: relative;
+    top: 200px;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-button {
+    font-size: 14px;
+    color: blue;
+}
+
+ul {
+    list-style-type: none;
+
+}
+
+.list {
+    align-self: center;
+}
+
+.listItem {
+    display: flex;
+}
+
+li {
+    margin-left: 5px;
+}
+
+.del-button {
+    font-size: 9px;
+
+    margin-top: 5px;
+}
+
+.edit-button {
+    font-size: 9px;
+    margin-top: 5px;
+}
+
+input {
+    position: relative;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.input {
+    display: flex;
+}
