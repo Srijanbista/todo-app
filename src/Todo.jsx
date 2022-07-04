@@ -59,28 +59,30 @@ function Todo() {
 
                                     return (
                                         <div className='listItem' key={uuid()}>
-                                            {/* Edit button  */}
-                                            <button className='edit-button' onClick={() => {
-                                                if (!inputdata) {
-                                                    setEdit(true);
-                                                    setInputData(currentElement.name)
-                                                    let arr = items.filter(obj => obj.id != currentElement.id)
-                                                    setItems(arr);
-                                                }
+                                            <div className="edit-delete-button">
+                                                {/* Edit button  */}
+                                                <button className='edit-button' onClick={() => {
+                                                    if (!inputdata) {
+                                                        setEdit(true);
+                                                        setInputData(currentElement.name)
+                                                        let arr = items.filter(obj => obj.id != currentElement.id)
+                                                        setItems(arr);
+                                                    }
 
 
 
-                                            }}>✏️</button>
+                                                }}>✏️</button>
 
-                                            {/* Delete Button */}
+                                                {/* Delete Button */}
 
-                                            <button className='del-button' onClick={() => {
-                                                if (!inputdata) {
+                                                <button className='del-button' onClick={() => {
+                                                    if (!inputdata) {
 
-                                                    let arr = items.filter(obj => obj.id != currentElement.id)
-                                                    setItems(arr);
-                                                }
-                                            }}>🗑️</button>
+                                                        let arr = items.filter(obj => obj.id != currentElement.id)
+                                                        setItems(arr);
+                                                    }
+                                                }}>🗑️</button>
+                                            </div>
 
                                             <li id={currentElement.id}>{currentElement.name}</li>
                                         </div>
