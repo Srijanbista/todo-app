@@ -1,103 +1,113 @@
-import React, { useState } from 'react'
-import './Todo.css';
-import { v4 as uuid } from 'uuid';
-import { isTemplateExpression } from 'typescript';
+import React, { useState } from "react";
+import "./Todo.css";
+import { v4 as uuid } from "uuid";
+import { isTemplateExpression } from "typescript";
 
+function Todo(props) {
+  const [inputdata, setInputData] = useState(""); //for input text
+  const [items, setItems] = useState([]); //for lists
+  const [edit, setEdit] = useState(false); //for  add or edit button
 
-function Todo() {
-
-    const [inputdata, setInputData] = useState("");//for input text
-    const [items, setItems] = useState([]);//for lists
-    const [edit, setEdit] = useState(false);//for  add or edit button
-
-    //addtion of new item
-    const addItem = () => {
-        if (!inputdata) {
-            alert('Plz fill the data')
-            setEdit(false)
-        }
-        else {
-            const myNewInputData = {
-                id: uuid(),
-                name: inputdata,
-            };
-            setItems([...items, myNewInputData])
-            setInputData('')
-        }
-
-    };
-
-
-    // enter key handler
-    const handler = (event) => {
-        if (event.key == 'Enter') {
-
-            document.getElementById('button-click').click();
-            setEdit(false)
-        }
+  //addtion of new item
+  const addItem = () => {
+    if (!inputdata) {
+      alert("Plz fill the data");
+      setEdit(false);
+    } else {
+      const myNewInputData = {
+        id: uuid(),
+        name: inputdata,
+      };
+      setItems([...items, myNewInputData]);
+      setInputData("");
     }
+  };
 
-    return (
-        <>
-            <div className="main">
-                <div className="Todo">
-                    <h1>Todo</h1>
-                    <div className="input">
-                        <input type="text" placeholder='✍️Add todos' id='hi' className='form-control' value={inputdata}
-                            onChange={(event) => setInputData(event.target.value)}
-                            onKeyPress={(event) => { handler(event) }} />
+  // enter key handler
+  const handler = (event) => {
+    if (event.key == "Enter") {
+      document.getElementById("button-click").click();
+      setEdit(false);
+    }
+  };
 
-                        <button className='add-button' id='button-click' onClick={addItem}>
-                            ➕
+  document.getElementById("title").innerHTML = `Todos-${items.length}`;
 
-                        </button>
-                    </div>
-                    <div className="list">
-                        <ul>
-                            {
-                                items.slice(0).reverse().map((currentElement) => {
+  return (
+    <>
+      <div className="main">
+        <div className="Todo">
+          <h1>Todo</h1>
+          <div className="input">
+            <input
+              type="text"
+              placeholder="✍️Add todos"
+              id="hi"
+              className="form-control"
+              value={inputdata}
+              onChange={(event) => setInputData(event.target.value)}
+              onKeyPress={(event) => {
+                handler(event);
+              }}
+            />
 
-                                    return (
-                                        <div className='listItem' key={uuid()}>
-                                            <div className="edit-delete-button">
-                                                {/* Edit button  */}
-                                                <button className='edit-button' onClick={() => {
-                                                    if (!inputdata) {
-                                                        setEdit(true);
-                                                        setInputData(currentElement.name)
-                                                        let arr = items.filter(obj => obj.id != currentElement.id)
-                                                        setItems(arr);
-                                                    }
-
-
-
-                                                }}>✏️</button>
-
-                                                {/* Delete Button */}
-
-                                                <button className='del-button' onClick={() => {
-                                                    if (!inputdata) {
-
-                                                        let arr = items.filter(obj => obj.id != currentElement.id)
-                                                        setItems(arr);
-                                                    }
-                                                }}>🗑️</button>
-                                            </div>
-
-                                            <li id={currentElement.id}>{currentElement.name}</li>
-                                        </div>
-                                    )
-                                })
+            <button className="add-button" id="button-click" onClick={addItem}>
+              ➕
+            </button>
+          </div>
+          <div className="list">
+            <ul>
+              {items
+                .slice(0)
+                .reverse()
+                .map((currentElement) => {
+                  return (
+                    <div className="listItem" key={uuid()}>
+                      <div className="edit-delete-button">
+                        {/* Edit button  */}
+                        <button
+                          className="edit-button"
+                          onClick={() => {
+                            if (!inputdata) {
+                              setEdit(true);
+                              setInputData(currentElement.name);
+                              let arr = items.filter(
+                                (obj) => obj.id != currentElement.id
+                              );
+                              setItems(arr);
                             }
-                        </ul>
+                          }}
+                        >
+                          ✏️
+                        </button>
 
+                        {/* Delete Button */}
+
+                        <button
+                          className="del-button"
+                          onClick={() => {
+                            if (!inputdata) {
+                              let arr = items.filter(
+                                (obj) => obj.id != currentElement.id
+                              );
+                              setItems(arr);
+                            }
+                          }}
+                        >
+                          🗑️
+                        </button>
+                      </div>
+
+                      <li id={currentElement.id}>{currentElement.name}</li>
                     </div>
-                </div>
-
-            </div>
-
-        </>
-    )
+                  );
+                })}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default Todo
+export default Todo;
